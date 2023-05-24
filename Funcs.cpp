@@ -74,12 +74,13 @@ string findPattern(const string& text, int K)   //набирает шаблон 
 
 bool IsKPeriodic(const string& text, int K)     //функция проверки кратности
 {
-    bool res;
+    bool res{false};
 
-    if(size(text) < 0 || size(text) > K)        //проверка выхода К за границы строки
-        res = false;
+    if(K > size(text) || K <= 0)        //проверка выхода К за границы строки
+        return res;
 
     string patt = findPattern(text, K);         //находим шаблон
+
     int countPatt = KMPSearch(patt, text);      //находим количество входа шаблона в строку
 
     if(countPatt * K % K == 0 && size(text) - (countPatt * K) == 0 )    //проверка кратности входов шаблона
